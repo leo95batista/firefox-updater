@@ -1,21 +1,8 @@
 #include "options_manager.h"
-#include "options/arch_option.h"
-#include "options/lang_option.h"
-
-std::string cli::options_manager::get_arch() const {
-    // TODO
-}
-
-std::string cli::options_manager::get_lang() const {
-    // TODO
-}
-
-std::filesystem::path cli::options_manager::get_path() const {
-    // TODO
-}
 
 void cli::options_manager::initialize_default_options() {
     options_map.emplace("arch", std::make_unique<cli::options::arch_option>());
+    options_map.emplace("edition", std::make_unique<cli::options::edition_option>());
     options_map.emplace("lang", std::make_unique<cli::options::lang_option>());
 }
 
@@ -26,6 +13,7 @@ int cli::options_manager::parse_options() {
 
     static struct option long_options[] = {
             {"arch",    required_argument, nullptr, 'a'},
+            {"edition", required_argument, nullptr, 'e'},
             {"lang",    required_argument, nullptr, 'l'},
             {"path",    required_argument, nullptr, 'p'},
             {"help",    no_argument,       nullptr, 'h'},
@@ -39,6 +27,10 @@ int cli::options_manager::parse_options() {
         switch (option_index) {
             case 'a': {
                 options_map.emplace("arch", std::make_unique<cli::options::arch_option>(optarg));
+                break;
+            }
+            case 'e': {
+                options_map.emplace("edition", std::make_unique<cli::options::edition_option>(optarg));
                 break;
             }
             case 'l': {
@@ -77,11 +69,12 @@ void cli::options_manager::print_help(int status) {
             "USAGE: firefox-updater --path <PATH> [OPTIONS]...\n\n"
 
             "OPTIONS\n"
-            "  -a, --arch <ARCH>    Define target architecture [default: linux]\n"
-            "  -l, --lang <LANG>    Define target language [default: en-US]\n"
-            "  -p, --path <PATH>    Define target path\n"
-            "  -h, --help           Print help\n"
-            "  -v, --version        Print version\n"
+            "  -a, --arch       <ARCH>      Define target architecture [default: linux]\n"
+            "  -e, --edition    <EDITION>   Define target architecture [default: standard]\n"
+            "  -l, --lang       <LANG>      Define target language [default: en-US]\n"
+            "  -p, --path       <PATH>      Define target path\n"
+            "  -h, --help                   Print help\n"
+            "  -v, --version                Print version\n"
     );
 
     std::exit(status);

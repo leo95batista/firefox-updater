@@ -15,6 +15,8 @@ add_executable(firefox_updater
         cli/options_manager.cpp
         cli/options/arch_option.h
         cli/options/arch_option.cpp
+        cli/options/edition_option.h
+        cli/options/edition_option.cpp
         cli/options/lang_option.h
         cli/options/lang_option.cpp
         cli/options/path_option.h
