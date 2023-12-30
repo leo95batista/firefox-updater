@@ -13,7 +13,7 @@ namespace cli::options {
         bool is_valid() override;
 
     private:
-        static const std::array<std::string_view, 1> available_languages;
+        static const std::array<std::string_view, 86> available_languages;
     };
 }
 
