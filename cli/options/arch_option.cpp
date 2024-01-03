@@ -5,5 +5,5 @@ const std::array<std::string_view, 2> cli::options::arch_option::available_archi
 };
 
 bool cli::options::arch_option::is_valid() {
-    return std::find(std::begin(available_architectures), std::end(available_architectures), get_option_value());
+    return utils::array::in_array(get_option_value(), available_architectures);
 }

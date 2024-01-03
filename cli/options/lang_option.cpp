@@ -10,5 +10,5 @@ const std::array<std::string_view, 86> cli::options::lang_option::available_lang
 };
 
 bool cli::options::lang_option::is_valid() {
-    return std::find(std::begin(available_languages), std::end(available_languages), get_option_value());
+    return utils::array::in_array(get_option_value(), available_languages);
 }

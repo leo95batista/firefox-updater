@@ -12,6 +12,8 @@ namespace cli::options {
 
         bool is_valid() override;
 
+        [[nodiscard]] std::string as_product() const;
+
     private:
         static const std::array<std::string_view, 5> available_editions;
     };

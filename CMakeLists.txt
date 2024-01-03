@@ -21,6 +21,7 @@ add_executable(firefox_updater
         cli/options/lang_option.cpp
         cli/options/path_option.h
         cli/options/path_option.cpp
+        include/utils/array.h
 )
 
 target_link_libraries(firefox_updater
@@ -29,4 +30,5 @@ target_link_libraries(firefox_updater
 
 target_include_directories(firefox_updater
         PRIVATE ${PROJECT_SOURCE_DIR}/cli
+        PRIVATE ${PROJECT_SOURCE_DIR}/include
 )

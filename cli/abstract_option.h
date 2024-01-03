@@ -2,6 +2,7 @@
 #define FIREFOX_UPDATER_ABSTRACT_OPTION_H
 
 #include "iostream"
+#include "utils/array.h"
 
 namespace cli {
     template<typename T>

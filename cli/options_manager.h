@@ -7,7 +7,6 @@
 #include "map"
 #include "memory"
 #include "variant"
-#include "abstract_option.h"
 #include "options/arch_option.h"
 #include "options/edition_option.h"
 #include "options/lang_option.h"
@@ -27,6 +26,8 @@ namespace cli {
                  */
                 print_help(EXIT_FAILURE);
             }
+
+            validate_options();
         }
 
         static void print_help(int status);
@@ -47,7 +48,7 @@ namespace cli {
 
         int parse_options();
 
-        void initialize_default_options();
+        void validate_options();
     };
 }
 
