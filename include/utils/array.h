@@ -4,8 +4,8 @@
 #include "algorithm"
 
 namespace utils::array {
-    template<typename T, typename U>
-    bool in_array(const T &value, const U &container) {
+    template<typename U, typename T>
+    bool in_array(const U &container, const T &value) {
         return std::find(std::begin(container), std::end(container), value) != std::end(container);
     }
 }

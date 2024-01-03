@@ -7,10 +7,8 @@
 #include "map"
 #include "memory"
 #include "variant"
+#include "abstract_option.h"
 #include "options/arch_option.h"
-#include "options/edition_option.h"
-#include "options/lang_option.h"
-#include "options/path_option.h"
 
 namespace cli {
     class options_manager {
@@ -26,8 +24,6 @@ namespace cli {
                  */
                 print_help(EXIT_FAILURE);
             }
-
-            validate_options();
         }
 
         static void print_help(int status);
@@ -40,15 +36,10 @@ namespace cli {
         int argc;
         char **argv;
         std::map<std::string, std::variant<
-                std::unique_ptr<cli::options::arch_option>,
-                std::unique_ptr<cli::options::edition_option>,
-                std::unique_ptr<cli::options::lang_option>,
-                std::unique_ptr<cli::options::path_option>
+                std::unique_ptr<cli::options::arch_option>
         >> options_map;
 
         int parse_options();
-
-        void validate_options();
     };
 }
 

@@ -8,8 +8,6 @@ namespace cli::options {
     class path_option : public cli::abstract_option<std::filesystem::path> {
     public:
         explicit path_option(const std::filesystem::path &path) : abstract_option(path) {};
-
-        bool is_valid() override;
     };
 }
 

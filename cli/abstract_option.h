@@ -5,25 +5,34 @@
 #include "utils/array.h"
 
 namespace cli {
-    template<typename T>
+    template<class T>
     class abstract_option {
     public:
-        explicit abstract_option(const T &value) : option_value(value) {}
+        explicit abstract_option(const T &option_value) : option_value(option_value) {}
 
-        virtual bool is_valid() = 0;
+        [[nodiscard]] T get_option_value() const;
 
-        T get_option_value() const;
+        [[nodiscard]] virtual bool is_valid_option_value() const = 0;
 
         ~abstract_option() = default;
 
     private:
         T option_value;
 
+    protected:
+        virtual void validate_option_value() final;
     };
 
-    template<typename T>
+    template<class T>
     T abstract_option<T>::get_option_value() const {
         return option_value;
+    }
+
+    template<class T>
+    void abstract_option<T>::validate_option_value() {
+        if (!is_valid_option_value()) {
+            std::exit(EXIT_FAILURE);
+        }
     }
 }
 

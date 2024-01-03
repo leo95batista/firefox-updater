@@ -48,16 +48,15 @@ int cli::options_manager::parse_options() {
                 break;
             }
             case 'e': {
-                std::cout << "E";
-                options_map.insert_or_assign("edition", std::make_unique<cli::options::edition_option>(optarg));
+                // TODO
                 break;
             }
             case 'l': {
-                options_map.insert_or_assign("lang", std::make_unique<cli::options::lang_option>(optarg));
+                // TODO
                 break;
             }
             case 'p': {
-                options_map.insert_or_assign("path", std::make_unique<cli::options::path_option>(optarg));
+                // TODO
                 break;
             }
             case 'h': {
@@ -76,12 +75,4 @@ int cli::options_manager::parse_options() {
     }
 
     return optind;
-}
-
-void cli::options_manager::validate_options() {
-    for (const auto &[option_name, option_instance]: options_map) {
-        std::visit([](const auto &option) -> void {
-            // TODO
-        }, option_instance);
-    }
 }

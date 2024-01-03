@@ -2,15 +2,16 @@
 #define FIREFOX_UPDATER_ARCH_OPTION_H
 
 #include "array"
-#include "algorithm"
 #include "abstract_option.h"
 
 namespace cli::options {
     class arch_option : public abstract_option<std::string> {
     public:
-        explicit arch_option(const std::string &arch = "linux") : abstract_option(arch) {};
+        explicit arch_option(const std::string &arch = "linux") : abstract_option(arch) {
+            validate_option_value();
+        };
 
-        bool is_valid() override;
+        [[nodiscard]] bool is_valid_option_value() const override;
 
     private:
         static const std::array<std::string_view, 2> available_architectures;
