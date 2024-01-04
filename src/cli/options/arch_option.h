@@ -13,6 +13,8 @@ namespace cli::options {
 
         [[nodiscard]] bool is_valid_option_value() const override;
 
+        [[nodiscard]] std::string get_validation_error_message() const override;
+
     private:
         static const std::array<std::string_view, 2> available_architectures;
     };

@@ -9,6 +9,9 @@
 #include "variant"
 #include "abstract_option.h"
 #include "options/arch_option.h"
+#include "options/edition_option.h"
+#include "options/lang_option.h"
+#include "options/path_option.h"
 
 namespace cli {
     class options_manager {
@@ -28,15 +31,16 @@ namespace cli {
 
         static void print_help(int status);
 
-        static void print_version();
-
         ~options_manager() = default;
 
     private:
         int argc;
         char **argv;
         std::map<std::string, std::variant<
-                std::unique_ptr<cli::options::arch_option>
+                std::unique_ptr<cli::options::arch_option>,
+                std::unique_ptr<cli::options::edition_option>,
+                std::unique_ptr<cli::options::lang_option>,
+                std::unique_ptr<cli::options::path_option>
         >> options_map;
 
         int parse_options();

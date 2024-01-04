@@ -4,6 +4,6 @@
 int main(int argc, char *argv[]) {
 
     cli::options_manager options_manager(argc, argv);
-
+    
     return EXIT_SUCCESS;
 }

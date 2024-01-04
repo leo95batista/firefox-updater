@@ -15,21 +15,15 @@ void cli::options_manager::print_help(int status) {
             "  -l, --lang <LANG>        Define target language [default: en-US]\n"
             "  -p, --path <PATH>        Define target path\n"
             "  -h, --help               Print help\n"
-            "  -v, --version            Print version\n"
     );
 
     std::exit(status);
 }
 
-void cli::options_manager::print_version() {
-    printf("%s\n", "1.0.0");
-    std::exit(EXIT_SUCCESS);
-}
-
 int cli::options_manager::parse_options() {
 
     int option_index;
-    static constexpr const char *short_options = "a:e:l:p:hv";
+    static constexpr const char *short_options = "a:e:l:p:h";
 
     static struct option long_options[] = {
             {"arch",    required_argument, nullptr, 'a'},
@@ -37,7 +31,6 @@ int cli::options_manager::parse_options() {
             {"lang",    required_argument, nullptr, 'l'},
             {"path",    required_argument, nullptr, 'p'},
             {"help",    no_argument,       nullptr, 'h'},
-            {"version", no_argument,       nullptr, 'v'},
             {nullptr, 0,                   nullptr, 0},
     };
 
@@ -48,27 +41,22 @@ int cli::options_manager::parse_options() {
                 break;
             }
             case 'e': {
-                // TODO
+                options_map.insert_or_assign("edition", std::make_unique<cli::options::edition_option>(optarg));
                 break;
             }
             case 'l': {
-                // TODO
+                options_map.insert_or_assign("lang", std::make_unique<cli::options::lang_option>(optarg));
                 break;
             }
             case 'p': {
-                // TODO
+                options_map.insert_or_assign("path", std::make_unique<cli::options::path_option>(optarg));
                 break;
             }
             case 'h': {
                 print_help(EXIT_SUCCESS);
                 break;
             }
-            case 'v': {
-                print_version();
-                break;
-            }
             default: {
-                fprintf(stderr, "\n");
                 print_help(EXIT_FAILURE);
             }
         }

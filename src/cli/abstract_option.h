@@ -14,6 +14,8 @@ namespace cli {
 
         [[nodiscard]] virtual bool is_valid_option_value() const = 0;
 
+        [[nodiscard]] virtual std::string get_validation_error_message() const = 0;
+
         ~abstract_option() = default;
 
     private:
@@ -31,6 +33,7 @@ namespace cli {
     template<class T>
     void abstract_option<T>::validate_option_value() {
         if (!is_valid_option_value()) {
+            std::cerr << "ERROR: " << get_validation_error_message() << std::endl;
             std::exit(EXIT_FAILURE);
         }
     }
